@@ -13,5 +13,6 @@ describe('Sign Controller', () => {
         }
         const htttpResponse = sut.handle(htttpRequest)
         expect(htttpResponse.statusCode).toBe(400)
+        expect(htttpResponse.body).toEqual(new Error('Missing param: name'))
     })
 })
