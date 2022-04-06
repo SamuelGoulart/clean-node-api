@@ -90,6 +90,7 @@ describe('DbAddAccount Usecase', () => {
 
     test('Should throw if Encrypter throws', async () => {
         const { sut, addAccountRepositoryStub} = makeSut()
+        // Só mock, quando é caso de erro
         jest.spyOn(addAccountRepositoryStub, 'add').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
         
         const accountData = {
@@ -101,4 +102,20 @@ describe('DbAddAccount Usecase', () => {
         await expect(promise).rejects.toThrow()
     })
 
+    test('Should return an account on sucess', async () => {
+        
+        const { sut } = makeSut()
+        const accountData = {
+            name: 'valid_name',
+            email: 'valid_email',
+            password: 'valid_password'
+        }
+        const account = await sut.add(accountData)
+        expect(account).toEqual({
+            id: 'valid_id',
+            name: 'valid_name',
+            email: 'valid_email',
+            password: 'hashed_password'
+        })
+    })
 })
