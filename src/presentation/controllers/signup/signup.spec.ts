@@ -1,7 +1,6 @@
 import { SignUpController } from './signup'
 import { InvalidParamError,MissingParamError, ServerError } from '../../errors'
 import { EmailValidator, AccountModel, AddAccount, AddAccountModel } from './signup-protocols'
-import { resolve } from 'path'
 
 const mackeEmailValidator = (): EmailValidator => {
     class EmailValidatorStub implements EmailValidator {
