@@ -107,4 +107,12 @@ describe('Login Controller', () => {
         const httResponse = await sut.handle(makeFakeRequest())
         expect(httResponse).toEqual(unauthorized())
     })
+
+    test('Should return 500 if Authentication throws', async () => {
+        const { sut, authenticationStub } = makeSut()
+        jest.spyOn(authenticationStub, 'auth').mockReturnValueOnce(new Promise((resolve, rejects) => rejects(new Error())))
+        const httResponse = await sut.handle(makeFakeRequest())
+        expect(httResponse).toEqual(serverError(new Error()))
+    })
+
 })
