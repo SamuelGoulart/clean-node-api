@@ -42,7 +42,9 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "express": "^4.17.3",
+    "knex": "^1.0.7",
     "mongodb": "^4.1.4",
+    "mssql": "^8.1.0",
     "validator": "^13.7.0"
   }
 }
