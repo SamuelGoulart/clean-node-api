@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
-import { Encrypter } from "../../data/protocols/criptography/encrypter"
+import { Hasher } from "../../data/protocols/criptography/hasher"
 
-export class BcryptAdapter implements Encrypter {
+export class BcryptAdapter implements Hasher {
     private readonly salt: number
 
     // Informações específicas da biblioteca são pelo constructor
@@ -10,9 +10,9 @@ export class BcryptAdapter implements Encrypter {
         this.salt = salt
     }
 
-    // O método do encrypt, faz parte do protocolo, da interface do Encrypter
+    // O método do encrypt, faz parte do protocolo, da interface do Hasher
     // No parâmetro do encrypt, só pode passar informções genéricas, que vão servir para qualquer biblioteca de criptografia
-    async encrypt(value: string): Promise<string> {
+    async hash (value: string): Promise<string> {
         const hash = await bcrypt.hash(value, this.salt)
         return hash
     }
