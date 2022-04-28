@@ -3,13 +3,10 @@ import { Hasher } from "../../../data/protocols/criptography/hasher"
 import { HashComparer } from '../../../data/protocols/criptography/hash-comparer'
 
 export class BcryptAdapter implements Hasher, HashComparer {
-    private readonly salt: number
 
     // Informações específicas da biblioteca são pelo constructor
     // Nem todas as bibliotecas de criptografia tem o salt
-    constructor (salt: number){
-        this.salt = salt
-    }
+    constructor (private readonly salt: number) {}
 
     // O método do encrypt, faz parte do protocolo, da interface do Hasher
     // No parâmetro do encrypt, só pode passar informções genéricas, que vão servir para qualquer biblioteca de criptografia
