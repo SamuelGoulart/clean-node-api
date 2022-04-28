@@ -20,7 +20,7 @@ describe('LoginValidation Factory', () => {
     test('Should call ValidationComposite with all validation', () => {
         makeLoginValidation()
         const validations: Validation[] = []
-        for (const field of ['name', 'password']) {
+        for (const field of ['email', 'password']) {
             validations.push(new RequiredFieldValidation(field))
         }
         validations.push(new EmailValidation('email', mackeEmailValidator()))
