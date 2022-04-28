@@ -1,20 +1,28 @@
-import mongoose from 'mongoose'
+// import mongoose from 'mongoose'
+import { MongoHelper } from '../infra/db/mongodb-old/helpers/mongo-helper'
+
 import app from './config/app';
 
 import env from './config/env'
 
 
-(async ()=> {
+// (async ()=> {
 
-    try {
+//     try {
         
-        await mongoose.connect(env.mongoUrl);
-        app.listen(env.port, ()=> console.log(`Server runnig at ${env.port}`))
+//         await mongoose.connect(env.mongoUrl);
+//         app.listen(env.port, ()=> console.log(`Server runnig at ${env.port}`))
 
-    } catch (error) {
-        console.log(error)
-    }
+//     } catch (error) {
+//         console.log(error)
+//     }
 
 
-})()
+// })()
+
+MongoHelper.connect(env.mongoUrl).then(async () => {
+    const app = (await import('./config/app')).default
+    app.listen(env.port, ()=> console.log(`Server runnig at ${env.port}`))
+})
+.catch(console.error)
 
