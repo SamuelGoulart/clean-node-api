@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "sucrase-node src/main/server.ts",
+    "start": "node dist/main/server.js",
+    "build": "rimraf dist && tsc",
+    "dev": "sucrase-node src/main/server.ts",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
@@ -13,11 +15,12 @@
     "test:ci": "npm test -- --coverage -no-cache"
   },
   "keywords": [],
-  "author": "",
+  "author": "Samuel Almeida Goulart",
   "license": "ISC",
   "devDependencies": {
     "@shelf/jest-mongodb": "^2.2.1",
     "@types/bcrypt": "^5.0.0",
+    "@types/express": "^4.17.13",
     "@types/jest": "^27.4.1",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/mongodb": "^4.0.7",
@@ -34,6 +37,7 @@
     "husky": "^7.0.4",
     "jest": "^27.5.1",
     "lint-staged": "^12.3.7",
+    "rimraf": "^3.0.2",
     "sucrase": "^3.21.0",
     "supertest": "^6.2.2",
     "ts-jest": "^27.1.4",
