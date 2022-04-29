@@ -1,0 +1,10 @@
+Criando a imagem clean-node-api
+  docker build -t clean-node-api .
+
+Entrar dentro da imagem
+  docker run -it clean-node-api .
+
+---- Mapeando uma porta para o container ----
+Estamos informando que a porta 5000 no Host é aberta e deve ser mapeada na porta 5000 do container.
+  docker run -p 5000:5000 clean-node-api
+

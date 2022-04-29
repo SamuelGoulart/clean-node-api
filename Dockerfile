@@ -1,15 +1,15 @@
-FROM node:16.14.2
+FROM node:16
 
 WORKDIR /usr/src/clean-node-api
 
 COPY ./package.json .
 
-# No desenvolvimento, instalamos devDependencies, enquanto na produção, removemos adicionando --only=prod.
-RUN npm install --only=prod
+# No desenvolvimento, instalamos devDependencies, enquanto na produção, removemos adicionando --only=prod
+RUN npm install --only=production
 
 
-COPY ./dist ./dist
+# COPY ./dist ./dist
 
-EXPOSE 5000
+# EXPOSE 5000
 
-CMD npm start
+# CMD npm start
