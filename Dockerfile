@@ -8,7 +8,7 @@ COPY ./package.json .
 RUN npm install --only=production
 
 
-# COPY ./dist ./dist
+COPY ./dist ./dist
 
 # EXPOSE 5000
 
