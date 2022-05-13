@@ -5,7 +5,7 @@ import env from './config/env'
 // (async ()=> {
 
 //     try {
-        
+
 //         await mongoose.connect(env.mongoUrl);
 //         app.listen(env.port, ()=> console.log(`Server runnig at ${env.port}`))
 
@@ -13,12 +13,11 @@ import env from './config/env'
 //         console.log(error)
 //     }
 
-
 // })()
 
-MongoHelper.connect(env.mongoUrl).then(async () => {
+MongoHelper.connect(env.mongoUrl)
+  .then(async () => {
     const app = (await import('./config/app')).default
     app.listen(env.port, () => console.log(`Server runnig at ${env.port}`))
-})
-.catch(console.error)
-
+  })
+  .catch(console.error)

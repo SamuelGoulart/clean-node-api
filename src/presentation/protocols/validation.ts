@@ -1,4 +1,4 @@
 // Protocolo
 export interface Validation {
-    validate (input: any): Error
+  validate: (input: any) => Error
 }

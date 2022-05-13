@@ -1,37 +1,33 @@
-import { badRequest, ok, serverError, unauthorized } from "../../helpers/http/http-helper";
-import { Controller, HttpRequest, HttpResponse, Authentication, Validation } from "./login-controller-protocols";
+import { badRequest, ok, serverError, unauthorized } from '../../helpers/http/http-helper'
+import { Controller, HttpRequest, HttpResponse, Authentication, Validation } from './login-controller-protocols'
 
 export class LoginController implements Controller {
-    constructor ( 
-        private readonly authentication: Authentication,  
-        private readonly validator: Validation
-    ) {}
+  constructor (
+    private readonly authentication: Authentication,
+    private readonly validator: Validation
+  ) {}
 
-    async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+    try {
+      const error = this.validator.validate(httpRequest.body)
 
-        try {
+      if (error) {
+        return badRequest(error)
+      }
 
-            const error = this.validator.validate(httpRequest.body)
+      const { email, password } = httpRequest.body
+      const accessToken = await this.authentication.auth({
+        email,
+        password
+      })
 
-            if (error) {
-                return badRequest(error)
-            }
+      if (!accessToken) {
+        return unauthorized()
+      }
 
-            const { email, password } = httpRequest.body
-            const accessToken = await this.authentication.auth({
-                email, 
-                password
-            })
-
-            if (!accessToken) {
-                return unauthorized()
-            }
-
-            return ok({ accessToken })
-
-        } catch (error) {
-            return serverError(error)
-        }
+      return ok({ accessToken })
+    } catch (error) {
+      return serverError(error)
     }
-
+  }
 }
